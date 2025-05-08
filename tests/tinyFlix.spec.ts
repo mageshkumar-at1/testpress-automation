@@ -12,6 +12,9 @@ test.describe('TinyFlix Tests', () => {
         await test.step('Navigate to TinyFlix', async () => {
             await tinyFlixPage.navigateToTinyFlix();
         });
+        await test.step('Verify the video titles', async () => {
+            await tinyFlixPage.verifyVideoTitles();
+        });
         await test.step('Post a comment on the video', async () => {
             await tinyFlixPage.addCommentToVideo();
         });
@@ -41,6 +44,9 @@ test.describe('TinyFlix Tests', () => {
         });
         await test.step('Filter videos', async () => {
             await tinyFlixPage.filterVideo();
+        });
+        await test.step('Sort videos', async () => {
+            await tinyFlixPage.sortingVideos();
         });
     });
 });

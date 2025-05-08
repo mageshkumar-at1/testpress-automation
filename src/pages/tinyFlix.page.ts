@@ -19,6 +19,7 @@ export class TinyFlixPage {
     bookmarkAlreadyAdded: Locator;
     searchVideos: Locator;
     filterVideos: Locator;
+    sortVideos: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -43,6 +44,7 @@ export class TinyFlixPage {
         this.bookmarkAlreadyAdded = page.getByText('Video already bookmarked');
         this.searchVideos = page.getByRole('textbox', { name: 'Search videos' });
         this.filterVideos = page.getByLabel('Filter videos');
+        this.sortVideos = page.getByLabel('Sort videos');
     }
 
     async navigateToTinyFlix() {
@@ -50,6 +52,23 @@ export class TinyFlixPage {
         await expect(this.page).toHaveURL('http://localhost:5173/');
     }
 
+    async verifyVideoTitles() {
+        const videoTitles = ['Advanced React', 'React Basics', 'Intro to Testing'];
+        for (const title of videoTitles) {
+            const titleLocator = this.page.locator(`//h3[text()='${title}']`);
+            await expect(titleLocator).toBeVisible(); // Assert that the title is visible
+        }
+    
+        const videoDescriptions = [
+            'Learn how to test React applications',
+            'Deep dive into React advanced concepts',
+            'Learn the fundamentals of React'
+        ];
+        for (const description of videoDescriptions) {
+            const descriptionLocator = this.page.locator(`//p[text()='${description}']`);
+            await expect(descriptionLocator).toBeVisible(); // Assert that the description is visible
+        }
+    }
     async addCommentToVideo() {
         await this.clickVideo.click();
         await this.addComment.fill('This is a test comment');
@@ -86,6 +105,7 @@ export class TinyFlixPage {
         await this.highQualityDropdown.selectOption({ label: 'High Quality' });
         await this.page.keyboard.press('ArrowUp');
         await this.page.keyboard.press('Enter');
+        expect(this.mediumQualityDropdown).toBeVisible();
     }
     async addBookmarks() {
         await this.addBookmark.click();
@@ -101,6 +121,11 @@ export class TinyFlixPage {
     async filterVideo() {
         await this.filterVideos.click();
         await this.page.keyboard.press('ArrowDown');
+        await this.page.keyboard.press('ArrowDown');
+        await this.page.keyboard.press('Enter');
+    }
+    async sortingVideos(){
+        await this.sortVideos.click();
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
     }
