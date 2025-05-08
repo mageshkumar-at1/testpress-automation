@@ -129,4 +129,32 @@ export class TinyFlixPage {
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
     }
+
+    async postEmptyComment() {
+        await this.clickVideo.click();
+        await this.addComment.fill('');
+        await this.commentText.click();
+        const errorMessage = this.page.getByText('Comment cannot be empty');
+        await expect.soft(errorMessage).toBeVisible();
+    }
+
+    async addDuplicateBookmark() {
+        await this.addVideoBookmark.click();
+        await this.addVideoBookmark.click();
+        await expect.soft(this.bookmarkAlreadyAdded).toBeVisible();
+    }
+    
+    async searchNonExistentVideo() {
+        await this.searchVideos.fill('No video');
+        await this.page.keyboard.press('Enter');
+    }
+    
+    async setInvalidVideoQuality() {
+        try {
+        await this.highQualityDropdown.selectOption({ value: '3x' });
+        } catch (error) {
+            console.error('Invalid video quality option:', error);
+            
+        }
+    }
 }
