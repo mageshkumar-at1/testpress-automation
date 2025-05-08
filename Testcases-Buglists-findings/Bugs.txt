@@ -1,0 +1,346 @@
+Environment for all the Bugs listed below:
+------------
+
+Browser: Chrome 135.0.7049.115
+
+OS: Windows 11
+
+Screen Size: [1920x1080]
+
+Device: Desktop
+
+Bug 1:
+------
+Severity: Critical
+
+Search filter does not fetch results for tags like #react, #hooks
+
+Component: Search / Filter
+
+Steps to Reproduce:
+
+1. Go to the search bar or filter section
+
+2. Enter #react or #hooks
+
+3. Observe the results
+
+Expected Behaviour:
+Results related to #react or #hooks should appear in the search results.
+
+Actual Behaviour:
+No results are fetched; the results section stays empty.
+
+
+Additional Context:
+This affects users trying to filter by popular tags, reducing discoverability.
+
+Suggested Fix:
+Review the tag parsing and backend search query logic, ensure hashtags are being correctly passed and matched in the database.
+
+
+Bug 2:
+------
+Severity: Critical
+
+Sign In / Sign Up button is unresponsive (no action on click)
+
+Component: Sign In/Sign Up
+
+Steps to Reproduce:
+
+1. Open the application homepage or landing page
+
+2. Click on the Sign In or Sign Up button
+
+3. Observe if any login modal, form, or page loads
+
+Expected Behaviour:
+Clicking the Sign In or Sign Up button should open the respective login or registration flow.
+
+Actual Behaviour:
+Clicking the button does nothing — no action, no error, no navigation, and no visible response.
+
+Additional Context:
+This blocks new users from registering and returning users from accessing their accounts.
+
+Suggested Fix:
+Check the button’s click event binding, ensure the frontend correctly triggers the intended action, and verify backend endpoints (if applicable) are reachable.
+
+Bug 3:
+------
+Severity: Critical
+
+Video playback fails — shows error message instead of playing
+
+Component: Video Player
+
+Steps to Reproduce:
+
+1. Navigate to the webpage
+
+2. Click on the video thumbnail or play button
+
+3. Wait for the video to load
+
+4. Observe what happens on the screen
+
+Expected Behaviour:
+The video should load and start playing normally when clicked.
+
+Actual Behaviour:
+Instead of playing, the player shows the error message:
+“Error loading video. Please try again later.”
+The timeline shows 0:00, and no playback occurs.
+
+
+Additional Context:
+This blocks users from accessing course materials or content, impacting usability and experience.
+
+Suggested Fix:
+Investigate the video loading pipeline, check if media files are accessible, validate the backend video streaming service, and ensure the frontend is correctly fetching the video URL.
+
+Bug 4:
+------
+
+Severity: High
+
+Incorrect bookmark label showing "Advanced ReactNaN:NaN" instead of the expected "Advanced React"
+
+Steps to Reproduce:
+
+1. Navigate to the webpage.
+
+2. Click the bookmark button inside the video player while the video is playing.
+
+3. Observe that the bookmark label shows "Advanced ReactNaN:NaN" instead of the expected video title, "Advanced React."
+
+Expected Behaviour:
+When clicking the bookmark button in the video player, the bookmark should be labeled as "Advanced React" (the title of the video), without any additional time data ("NaN:NaN").
+
+Actual Behaviour:
+Clicking the bookmark button results in the bookmark being labelled as "Advanced ReactNaN:NaN," which erroneously includes "NaN:NaN" as part of the label. This suggests that the time data is being incorrectly applied, even though time is not logged for video bookmarks.
+
+Additional Context:
+This issue affects the clarity of bookmarks and could cause confusion for users who expect a clean, simple label based on the video title.
+
+Suggested Fix:
+Ensure that the bookmark label only contains the video title (e.g., "Advanced React") and that no time-related data (like "NaN:NaN") is appended when bookmarking a video. Remove any unnecessary time logging functionality for video bookmarks.
+
+Bug 5:
+-------
+
+Severity: High
+
+Like button for reply comment is not working
+
+Component: Comments Section / Like Button
+
+Steps to Reproduce:
+
+1. Navigate to the webpage.
+
+2. Click the like button on  the comment to increase the like count.
+
+3. Post a reply to the comment.
+
+4. Observe that a new like button appears for the reply comment.
+
+5. Click the like button for the reply comment and observe that the like count does not increase or the button does not function as expected.
+
+Expected Behaviour:
+When a reply comment is posted, the like button for the reply should function correctly, increasing the like count with each click, similar to how the like button for the original comment works.
+
+Actual Behaviour:
+The like button for the reply comment is displayed, but it does not work. Clicking the like button does not increase the like count, and the button remains unresponsive.
+
+Additional Context:
+This issue affects user interactions with reply comments, making it impossible to like a reply and may confuse users who expect consistent functionality across all comments and replies.
+
+Suggested Fix:
+Ensure that the like button for reply comments is properly linked to the like count system and is fully functional, similar to the like button for original comments. Implement the correct event listeners and update the UI to reflect the like count for replies.
+
+Bug 6:
+------
+
+Severity: High
+
+Page reloads with "Loading..." when clicking on a video file
+
+Component: Video Player
+
+Steps to Reproduce:
+
+1. Navigate to the webpage.
+
+2. Click on any video file.
+
+3. Observe that the page reloads, showing a "Loading..." indicator.
+
+4. After the page reloads, the video player appears below the three videos.
+
+Expected Behaviour:
+Clicking on a video should load it directly into the video player without reloading the page or displaying "Loading...".
+
+Actual Behaviour:
+Clicking on a video triggers a page reload, showing a "Loading..." message, and after the reload, the video player loads below all the 3 videos.
+
+Additional Context:
+This issue occurs on all video files and is consistent across different browsers. The page reloads unnecessarily, resulting in a poor user experience and additional wait time.
+
+Suggested Fix:
+Implement a smoother video loading process without the need to reload the entire page. Ensure the video player appears directly on top of the video files or within the designated area without causing a page refresh.
+
+Bug 7:
+------
+
+Severity: Medium
+
+No error or feedback message when search returns no results
+
+Component: Search / Filter
+
+Steps to Reproduce:
+
+1. Go to the search bar
+
+2. Enter a term or tag that has no matching results
+
+3. Observe the screen and search result area
+
+Expected Behaviour:
+If no results are found, display a clear “No results found” message or visual indicator to inform the user.
+
+Actual Behaviour:
+The search results area stays blank or empty with no message, leaving the user unsure if the search is working or if no matches exist.
+
+Additional Context:
+Lack of user feedback creates confusion and reduces clarity in the search experience.
+
+Suggested Fix:
+Add a fallback UI or message component that triggers when the search results array is empty, e.g., “No items match your search.”
+
+
+Bug 8:
+------
+
+Severity: Medium
+
+Bookmark button on video card is non-functional until video is clicked
+
+Steps to Reproduce:
+
+1. Navigate to the webpage.
+
+2. Observe the bookmark button on each video card.
+
+3. Click on any video to open it in the video player.
+
+4. Observe that the bookmark button inside the video player works and adds the bookmark.
+
+5. Notice that the bookmark button on the video card does nothing until the video is clicked.
+
+Expected Behaviour:
+The bookmark button on the video card should be functional and allow users to bookmark the video without needing to click and open the video first.
+
+Actual Behaviour:
+The bookmark button on the video card serves no function unless the video is clicked first, after which the bookmark button inside the video player becomes functional.
+
+Additional Context:
+This issue can confuse users who expect the bookmark functionality to be available directly from the video card without opening the video.
+
+Suggested Fix:
+Ensure that the bookmark button on the video card functions immediately when clicked, without requiring the user to open the video first.
+
+Bug 9:
+------
+
+Severity: Medium
+
+No error thrown when comment text exceeds the character limit
+
+Component: Comments Section
+
+Steps to Reproduce:
+
+1. Navigate to the webpage.
+
+2. Try to add a comment that exceeds the character limit.
+
+3. Observe that no error or warning message is displayed even though the comment text exceeds the limit.
+
+Expected Behaviour:
+When a user attempts to enter a comment that exceeds the character limit, an error or warning message should be displayed, indicating that the text limit has been exceeded.
+
+Actual Behaviour:
+When the text exceeds the character limit, no error or warning message appears. The comment can still be submitted, potentially leading to a malformed comment.
+
+Additional Context:
+This issue can lead to comments being submitted with excessive text, the text crosses the limit will not be displayed in UI. It’s also a poor user experience since there’s no immediate feedback.
+
+Suggested Fix:
+Implement proper validation on the comment input field to ensure that when the text exceeds the character limit, an error message is shown to the user, preventing the submission of oversized comments.
+
+Bug 10:
+-------
+
+Severity: Medium
+
+Post Comment button is incorrectly positioned
+
+Component: Comments Section / Post Comment Button
+
+Steps to Reproduce:
+
+1. Navigate to the webpage.
+
+2. Look at the position of the "Post Comment" button.
+
+3. Observe that the "Post Comment" button is not located directly below the "Add a comment" text box.
+
+Expected Behaviour:
+The "Post Comment" button should be positioned directly below the "Add a comment" text box, aligned neatly in the UI to ensure ease of use.
+
+Actual Behaviour:
+The "Post Comment" button is incorrectly positioned, which disrupts the layout and may cause confusion or difficulty in interacting with the comment box.
+
+Additional Context:
+This misalignment can lead to a poor user experience, especially on different screen sizes, where the button's position may seem inconsistent or out of place.
+
+Suggested Fix:
+Adjust the layout or CSS styling so that the "Post Comment" button is properly aligned directly below the "Add a comment" text box, ensuring a more intuitive and visually consistent layout.
+
+Bug 11:
+------
+
+Severity: Low
+
+Hashtags displayed without spacing between them
+
+Component: Video Card UI / Tag Display
+
+Steps to Reproduce:
+
+1. Navigate to the webpage.
+
+2. Look at the hashtags shown under each video card (e.g., #react#hooks#performance).
+
+3. Observe how the hashtags are displayed.
+
+Expected Behaviour:
+Each hashtag should have a space or visual separator (e.g., margin or padding) between them for better readability. 
+
+Example:
+
+#react  #hooks  #performance
+
+Actual Behaviour:
+Hashtags are displayed without any space between them, appearing merged:
+
+#react#hooks#performance
+
+Additional Context:
+This is a visual issue — while it doesn’t break functionality, it reduces readability and the polished look of the UI.
+
+Suggested Fix:
+Update the CSS or component rendering to insert a space or margin between each hashtag element.
