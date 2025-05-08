@@ -58,7 +58,7 @@ export class TinyFlixPage {
             const titleLocator = this.page.locator(`//h3[text()='${title}']`);
             await expect(titleLocator).toBeVisible(); // Assert that the title is visible
         }
-    
+
         const videoDescriptions = [
             'Learn how to test React applications',
             'Deep dive into React advanced concepts',
@@ -124,7 +124,7 @@ export class TinyFlixPage {
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
     }
-    async sortingVideos(){
+    async sortingVideos() {
         await this.sortVideos.click();
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
@@ -143,18 +143,18 @@ export class TinyFlixPage {
         await this.addVideoBookmark.click();
         await expect.soft(this.bookmarkAlreadyAdded).toBeVisible();
     }
-    
+
     async searchNonExistentVideo() {
         await this.searchVideos.fill('No video');
         await this.page.keyboard.press('Enter');
     }
-    
+
     async setInvalidVideoQuality() {
         try {
-        await this.highQualityDropdown.selectOption({ value: '3x' });
+            await this.highQualityDropdown.selectOption({ value: '3x' });
         } catch (error) {
             console.error('Invalid video quality option:', error);
-            
+
         }
     }
 }

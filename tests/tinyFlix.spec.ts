@@ -53,23 +53,17 @@ test.describe('TinyFlix Tests', () => {
         await test.step('Navigate to TinyFlix', async () => {
             await tinyFlixPage.navigateToTinyFlix();
         });
-
         await test.step('Try posting empty comment', async () => {
             await tinyFlixPage.postEmptyComment();
         });
-
         await test.step('Try adding duplicate bookmark', async () => {
             await tinyFlixPage.addDuplicateBookmark();
         });
-
         await test.step('Select invalid video quality', async () => {
             await tinyFlixPage.setInvalidVideoQuality();
         });
-    
         await test.step('Search non-existent video', async () => {
             await tinyFlixPage.searchNonExistentVideo();
         });
-    
     });
-    
 });
